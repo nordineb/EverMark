@@ -42,6 +42,10 @@ namespace EvernoteMvcExample
 
         private void SaveJson(IDictionary<string, string> dictionary)
         {
+            var directory = System.IO.Path.GetDirectoryName(Path) ?? "";
+            if (!Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+
             File.WriteAllText(Path, JsonConvert.SerializeObject(dictionary));
         }
 

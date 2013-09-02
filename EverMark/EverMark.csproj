@@ -53,6 +53,12 @@
     <Reference Include="DotNetOpenAuth.OAuth.Consumer">
       <HintPath>..\packages\DotNetOpenAuth.OAuth.Consumer.4.3.1.13153\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
     </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Io">
+      <HintPath>..\packages\elmah.io.1.0.0.17\lib\net40\Elmah.Io.dll</HintPath>
+    </Reference>
     <Reference Include="ePunkt.Utilities">
       <HintPath>..\packages\ePunkt.Utilities.0.0.5-alpha\lib\net40-Client\ePunkt.Utilities.dll</HintPath>
     </Reference>
