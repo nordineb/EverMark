@@ -1,0 +1,50 @@
+﻿@using System.Web.Optimization
+@model EvernoteMvcExample.ViewModels.Editor.IndexViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+@using (Html.BeginForm())
+{
+    <div style="width: 50%; float: right; padding-left: 20px; overflow: hidden;" id="markdown">
+    </div>
+    <div style="width: 50%;">
+        <textarea style="width: 100%; height: 100%; white-space: nowrap; font-family: monospace; font-size: 0.8em;" name="content" id="content">@Model.Content</textarea>
+        <div style="margin-top: 10px; text-align: right;">
+            <input type="submit" value="Save to Evernote" class="btn btn-success" />
+        </div>
+    </div>
+}
+
+@section scripts {
+    @Scripts.Render("~/bundles/markdown")
+
+    <script>
+        $(document).ready(function () {
+            $("#content").keyup(function () {
+                updateMarkdown();
+            });
+
+            resizeDivs();
+            updateMarkdown();
+
+            $(window).resize(function () {
+                resizeDivs();
+            });
+        });
+
+        function resizeDivs() {
+            var height = $(this).height();
+            height = height - 115;
+            $("#markdown").css("height", height + "px");
+            $("#content").css("height", height + "px");
+        }
+
+        function updateMarkdown() {
+            var converter = Markdown.getSanitizingConverter();
+            var html = converter.makeHtml($("#content").val());
+            $("#markdown").html(html);
+        }
+    </script>
+}

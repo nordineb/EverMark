@@ -1,0 +1,19 @@
+﻿@using Evernote.EDAM.Type
+@model EvernoteMvcExample.ViewModels.Notes.IndexViewModel
+
+<h2>Choose a note</h2>
+<p>Click on one of your notebooks to display the notes inside. Please note that EverMark saves pure plain Markdown into your notes; existing formatting will be removed.</p>
+
+@foreach (var notebook in Model.Notebooks)
+{
+    <div>
+        <a href="@Url.Action("Index", new { notebook = notebook.Id })">@notebook.Name</a>
+        <ul>
+            @foreach (var note in notebook.Notes)
+            {
+                <li><a href="@Url.Action("Index", "Editor", new { note = note.Id })">@note.Name</a></li>
+            }
+        </ul>
+    </div>
+}
+
