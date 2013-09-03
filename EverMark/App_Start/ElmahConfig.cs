@@ -18,10 +18,12 @@ namespace EvernoteMvcExample
             return context =>
             {
                 var container = new ServiceContainer(sp(context));
+
                 var config = new Dictionary<string, string>();
                 config["LogId"] = Configuration.ElmahLogId;
                 var log = new Elmah.Io.ErrorLog(config);
-                container.AddService(typeof(Elmah.Io.ErrorLog), log);
+
+                container.AddService(typeof(ErrorLog), log);
                 return container;
             };
         }
