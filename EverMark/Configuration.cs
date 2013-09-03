@@ -8,8 +8,10 @@ namespace EvernoteMvcExample
     public static class Configuration
     {
         public static string EvernoteUrl = Settings.Get("EvernoteUrl", "");
-        public static string ConsumerKey = Settings.Get("EvernoteConsumerKey", "");
-        public static string ConsumerSecret = Settings.Get("EvernoteConsumerSecret", "");
+        public static string EvernoteConsumerKey = Settings.Get("EvernoteConsumerKey", "");
+        public static string EvernoteConsumerSecret = Settings.Get("EvernoteConsumerSecret", "");
+
+        public static string ElmahLogId = Settings.Get("ElmahLogId", "");
 
         public static ServiceProviderDescription GetOauthConfiguration()
         {

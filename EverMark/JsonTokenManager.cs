@@ -15,8 +15,8 @@ namespace EvernoteMvcExample
         public JsonTokenManager(HttpRequestBase request)
         {
             _request = request;
-            ConsumerKey = Configuration.ConsumerKey;
-            ConsumerSecret = Configuration.ConsumerSecret;
+            ConsumerKey = Configuration.EvernoteConsumerKey;
+            ConsumerSecret = Configuration.ElmahLogId;
         }
 
         public string ConsumerKey { get; private set; }

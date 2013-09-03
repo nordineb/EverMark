@@ -1,7 +1,9 @@
-﻿using System.Web.Security;
+﻿using System;
+using System.Web.Security;
 using DotNetOpenAuth.Messaging;
 using DotNetOpenAuth.OAuth;
 using System.Web.Mvc;
+using ApplicationException = Elmah.ApplicationException;
 
 namespace EvernoteMvcExample.Controllers
 {
@@ -31,6 +33,12 @@ namespace EvernoteMvcExample.Controllers
         {
             return View();
         }
+
+        public ActionResult Error()
+        {
+            throw new ApplicationException("Test exception on " + DateTime.Now + ".");
+        }
+
 
         public ActionResult Logoff()
         {
