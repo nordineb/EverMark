@@ -7,33 +7,38 @@
 
 <style type="text/css">
     .container { max-width: 100%; margin-left: 0; margin-right: 15px; padding-left: 0; padding-right: 0; }
-    .row { margin-top: -8px; }
-        .row .row { margin: 0; }
-        .row:last-child { margin-top: 1px; }
-    .col-lg-6, .col-lg-12 { padding-right: 0; }
+    #mainRow { margin-top: -8px; }
+    .row .row { margin: 0; }
+    .row:last-child { margin-top: 1px; }
+    .col-lg-6, .col-lg-12, .col-xs-6 { padding-right: 0; }
 
     .navbar-nav { margin: 0; }
     .navbar-header { padding-left: 10px; }
     .navbar-collapse { padding-right: 0; }
     .navbar li:last-child a { padding-right: 0; }
 
+    .checkbox { margin-top: 7px; margin-bottom: 0; }
+
     #markdownInput { width: 100%; white-space: pre; word-wrap: break-word; font-family: monospace; font-size: 0.8em; background-color: rgb(30,30,30); color: rgb(220, 220,220); border: 0; padding: 10px; }
     #markdownRender { padding: 10px; overflow: auto; }
+    #submitButtonCell { text-align: right; }
+    #noteTitleCell { text-align: center; }
+    #noteTitle { padding: 10px; line-height: 32px; }
 </style>
 
-<div class="row" style="margin-top: -8px;">
+<div class="row" id="mainRow">
     <div class="col-lg-6">
         <textarea name="content" id="markdownInput">@Model.Content</textarea>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-xs-6">
                 <div class="checkbox">
                     <label>
                         <input type="checkbox" id="enableAutoSave">
-                        Auto-save every 60 seconds
+                        Auto-save every 60s
                     </label>
                 </div>
             </div>
-            <div class="col-lg-6" style="text-align: right;">
+            <div class="col-xs-6" id="submitButtonCell">
                 <span id="submitStatus">&nbsp;</span>
                 <input type="submit" value="Save to Evernote" id="submitButton" class="btn btn-success" />
             </div>
@@ -42,8 +47,8 @@
     <div class="col-lg-6">
         <div id="markdownRender"></div>
         <div class="row">
-            <div class="col-lg-12" style="text-align: center;">
-                <span class="alert-info" style="padding: 10px; line-height: 32px;">@Model.NotebookAndTitle</span>
+            <div class="col-lg-12" id="noteTitleCell">
+                <span id="noteTitle" class="alert-info">@Model.NotebookAndTitle</span>
             </div>
         </div>
     </div>
@@ -118,7 +123,7 @@
                 clearInterval(_autoSaveTimer);
             }
         }
-        
+
         function checkForDifferencesBetweenLocalAndServer() {
             var evernoteContent = $("#markdownInput").val();
             var localContent = loadFromLocalStorage();
