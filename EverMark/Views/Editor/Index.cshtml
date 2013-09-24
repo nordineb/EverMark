@@ -17,7 +17,7 @@
     .navbar-collapse { padding-right: 0; }
     .navbar li:last-child a { padding-right: 0; }
 
-    #markdownInput { width: 100%; white-space: normal; font-family: monospace; font-size: 0.8em; background-color: rgb(30,30,30); color: rgb(220, 220,220); border: 0; padding: 10px; }
+    #markdownInput { width: 100%; white-space: pre; word-wrap: break-word; font-family: monospace; font-size: 0.8em; background-color: rgb(30,30,30); color: rgb(220, 220,220); border: 0; padding: 10px; }
     #markdownRender { padding: 10px; overflow: auto; }
 </style>
 
@@ -69,7 +69,8 @@
 
         function updateMarkdown() {
             var converter = Markdown.getSanitizingConverter();
-            var html = converter.makeHtml($("#markdownInput").val());
+            var text = $("#markdownInput").val();
+            var html = converter.makeHtml(text);
             $("#markdownRender").html(html);
         }
     </script>
