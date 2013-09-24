@@ -27,7 +27,12 @@ namespace EvernoteMvcExample.Controllers
                 //replace the <en-note> tag
                 content = content.Substring(9);
                 content = content.Substring(0, content.Length - 10);
-                content = content.Replace("<br />", "\r\n");
+                content = content.Replace("<br />", "\r\n").Trim();
+
+                if (content.StartsWith("<pre>"))
+                    content = content.Substring(5);
+                if (content.EndsWith("</pre>"))
+                    content = content.Substring(0, content.Length - 6);
 
                 viewModel.Content = content.Trim();
             }
@@ -44,7 +49,7 @@ namespace EvernoteMvcExample.Controllers
 
             content = content.Replace("\r", "").Replace("\n", "<br />");
 
-            n.Content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\"><en-note>" + (content ?? "").Trim() + "</en-note>";
+            n.Content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\"><en-note><pre>" + (content ?? "").Trim() + "</pre></en-note>";
             noteStore.updateNote(User.Identity.Name, n);
 
             return RedirectToAction("Index", new { note });
