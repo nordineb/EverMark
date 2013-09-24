@@ -1,10 +1,10 @@
-﻿using System.IO;
-using DotNetOpenAuth.OAuth.ChannelElements;
+﻿using DotNetOpenAuth.OAuth.ChannelElements;
 using DotNetOpenAuth.OAuth.Messages;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Web;
-using Newtonsoft.Json;
 
 namespace EvernoteMvcExample
 {
@@ -16,7 +16,7 @@ namespace EvernoteMvcExample
         {
             _request = request;
             ConsumerKey = Configuration.EvernoteConsumerKey;
-            ConsumerSecret = Configuration.ElmahLogId;
+            ConsumerSecret = Configuration.EvernoteConsumerSecret;
         }
 
         public string ConsumerKey { get; private set; }

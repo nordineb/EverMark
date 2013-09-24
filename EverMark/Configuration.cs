@@ -7,11 +7,11 @@ namespace EvernoteMvcExample
 {
     public static class Configuration
     {
-        public static string EvernoteUrl = Settings.Get("EvernoteUrl", "");
-        public static string EvernoteConsumerKey = Settings.Get("EvernoteConsumerKey", "");
-        public static string EvernoteConsumerSecret = Settings.Get("EvernoteConsumerSecret", "");
+        public static string EvernoteUrl = Settings.Get("EvernoteUrl", "").Trim('/', ' ');
+        public static string EvernoteConsumerKey = Settings.Get("EvernoteConsumerKey", "").Trim();
+        public static string EvernoteConsumerSecret = Settings.Get("EvernoteConsumerSecret", "").Trim();
 
-        public static string ElmahLogId = Settings.Get("ElmahLogId", "");
+        public static string ElmahLogId = Settings.Get("ElmahLogId", "").Trim();
 
         public static ServiceProviderDescription GetOauthConfiguration()
         {
