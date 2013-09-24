@@ -28,7 +28,8 @@
             <div class="col-lg-6">
                 <div class="checkbox">
                     <label>
-                        <input type="checkbox" id="enableAutoSave"> Auto-save every 60 seconds
+                        <input type="checkbox" id="enableAutoSave">
+                        Auto-save every 60 seconds
                     </label>
                 </div>
             </div>
@@ -57,21 +58,22 @@
         $(document).ready(function () {
             $("#markdownInput").keyup(function () {
                 updateMarkdown();
+                saveToLocalStorage();
+            });
+            $("#submitButton").click(save);
+
+            resizeDivs();
+            updateMarkdown();
+            $(window).resize(function () {
+                resizeDivs();
             });
 
-            $("#submitButton").click(save);
+            checkForDifferencesBetweenLocalAndServer();
 
             if ($.cookie(AUTOSAVE_COOKIE_KEY) == null || $.cookie(AUTOSAVE_COOKIE_KEY) == "true")
                 $("#enableAutoSave").prop("checked", true);
             enableOrDisableAutoSave();
             $("#enableAutoSave").click(enableOrDisableAutoSave);
-
-            resizeDivs();
-            updateMarkdown();
-
-            $(window).resize(function () {
-                resizeDivs();
-            });
         });
 
         function resizeDivs() {
@@ -115,6 +117,31 @@
                 $.cookie(AUTOSAVE_COOKIE_KEY, "false");
                 clearInterval(_autoSaveTimer);
             }
+        }
+        
+        function checkForDifferencesBetweenLocalAndServer() {
+            var evernoteContent = $("#markdownInput").val();
+            var localContent = loadFromLocalStorage();
+
+            if (localContent == null)
+                return;
+
+            if (evernoteContent != localContent) {
+                var dialogResult = confirm("There are differences between your last locally saved version and the version from Evernote. Do you want to load your local version and overwrite the changes on Evernote?");
+                if (dialogResult) {
+                    $("#markdownInput").val(loadFromLocalStorage());
+                    updateMarkdown();
+                }
+            }
+        }
+
+        function saveToLocalStorage() {
+            var text = $("#markdownInput").val();
+            localStorage["note_@Model.NoteId"] = text;
+        }
+
+        function loadFromLocalStorage() {
+            return localStorage["note_@Model.NoteId"];
         }
     </script>
 }
