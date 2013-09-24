@@ -8,6 +8,7 @@ namespace EvernoteMvcExample
         {
             bundles.Add(new ScriptBundle("~/bundles/js").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery.cookie.js",
                         "~/Scripts/bootstrap.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/markdown").Include(

@@ -21,36 +21,50 @@
     #markdownRender { padding: 10px; overflow: auto; }
 </style>
 
-@using (Html.BeginForm())
-{
-    <div class="row" style="margin-top: -8px;">
-        <div class="col-lg-6">
-            <textarea name="content" id="markdownInput">@Model.Content</textarea>
-            <div class="row">
-                <div class="col-lg-12" style="text-align: right;">
-                    <input type="submit" value="Save to Evernote" id="submitButton" class="btn btn-success" />
+<div class="row" style="margin-top: -8px;">
+    <div class="col-lg-6">
+        <textarea name="content" id="markdownInput">@Model.Content</textarea>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="enableAutoSave"> Auto-save every 60 seconds
+                    </label>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-6">
-            <div id="markdownRender"></div>
-            <div class="row">
-                <div class="col-lg-12" style="text-align: center;">
-                    @Model.NotebookAndTitle
-                </div>
+            <div class="col-lg-6" style="text-align: right;">
+                <span id="submitStatus">&nbsp;</span>
+                <input type="submit" value="Save to Evernote" id="submitButton" class="btn btn-success" />
             </div>
         </div>
     </div>
-}
+    <div class="col-lg-6">
+        <div id="markdownRender"></div>
+        <div class="row">
+            <div class="col-lg-12" style="text-align: center;">
+                <span class="alert-info" style="padding: 10px; line-height: 32px;">@Model.NotebookAndTitle</span>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section scripts {
     @Scripts.Render("~/bundles/markdown")
 
     <script>
+        var AUTOSAVE_COOKIE_KEY = "autosave";
+
         $(document).ready(function () {
             $("#markdownInput").keyup(function () {
                 updateMarkdown();
             });
+
+            $("#submitButton").click(save);
+
+            if ($.cookie(AUTOSAVE_COOKIE_KEY) == null || $.cookie(AUTOSAVE_COOKIE_KEY) == "true")
+                $("#enableAutoSave").prop("checked", true);
+            enableOrDisableAutoSave();
+            $("#enableAutoSave").click(enableOrDisableAutoSave);
 
             resizeDivs();
             updateMarkdown();
@@ -72,6 +86,35 @@
             var text = $("#markdownInput").val();
             var html = converter.makeHtml(text);
             $("#markdownRender").html(html);
+        }
+
+        function save() {
+            var text = $("#markdownInput").val();
+
+            $("#submitButton").prop("disabled", true);
+            $("#submitStatus").html("").removeClass("alert-success").removeClass("alert-danger");
+            $.ajax("@Url.Action("Index", new { note = Model.NoteId })", {
+                type: "POST",
+                data: { content: text }
+            }).done(function () {
+                $("#submitStatus").html("Saved :)").addClass("alert-success");
+                setTimeout("$('#submitStatus').html('');", 5000);
+            }).fail(function () {
+                $("#submitStatus").html("Error while saving :(").addClass("alert-danger");
+            }).always(function () {
+                $("#submitButton").prop("disabled", false);
+            });
+        }
+
+        var _autoSaveTimer = null;
+        function enableOrDisableAutoSave() {
+            if ($("#enableAutoSave").prop("checked")) {
+                $.cookie(AUTOSAVE_COOKIE_KEY, "true");
+                _autoSaveTimer = setInterval("save();", 10000);
+            } else {
+                $.cookie(AUTOSAVE_COOKIE_KEY, "false");
+                clearInterval(_autoSaveTimer);
+            }
         }
     </script>
 }
