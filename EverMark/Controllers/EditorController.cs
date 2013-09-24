@@ -14,7 +14,9 @@ namespace EvernoteMvcExample.Controllers
             var noteStore = Evernote.GetNoteStore(User.Identity.Name);
 
             var n = noteStore.getNote(User.Identity.Name, note, true, false, false, false);
+            var notebook = noteStore.getNotebook(User.Identity.Name, n.NotebookGuid);
             viewModel.Title = n.Title;
+            viewModel.NotebookAndTitle = notebook.Name + "\\" + n.Title;
 
             var xmlContent = XDocument.Parse(n.Content);
             if (xmlContent.Root != null)
