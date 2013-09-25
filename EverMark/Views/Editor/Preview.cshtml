@@ -1,0 +1,26 @@
+﻿@using System.Web.Optimization
+@model EvernoteMvcExample.ViewModels.Editor.IndexViewModel
+
+@{
+    ViewBag.Title = @Model.Title;
+}
+
+<style type="text/css">
+    body { padding-top: 10px; }
+    .navbar { display: none; }
+    #markdownInput { white-space: pre; word-wrap: break-word; display: none; }
+</style>
+
+<div id="markdownRender">
+</div>
+<textarea id="markdownInput">@Model.Content</textarea>
+
+@section scripts {
+    @Scripts.Render("~/bundles/markdown")
+    <script>
+        var converter = Markdown.getSanitizingConverter();
+        var text = $("#markdownInput").val();
+        var html = converter.makeHtml(text);
+        $("#markdownRender").html(html);
+    </script>
+}

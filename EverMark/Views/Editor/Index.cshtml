@@ -10,7 +10,7 @@
     #mainRow { margin-top: -8px; }
     .row .row { margin: 0; }
     .row:last-child { margin-top: 1px; }
-    .col-lg-6, .col-lg-12, .col-xs-6 { padding-right: 0; }
+    .col-lg-6, .col-lg-12, .col-xs-6, .col-md-6 { padding-right: 0; }
 
     .navbar-nav { margin: 0; }
     .navbar-header { padding-left: 10px; }
@@ -24,6 +24,7 @@
     #submitButtonCell { text-align: right; }
     #noteTitleCell { text-align: center; }
     #noteTitle { padding: 10px; line-height: 32px; }
+    #noteDownloadCell { text-align: right; }
 </style>
 
 <div class="row" id="mainRow">
@@ -47,8 +48,11 @@
     <div class="col-lg-6">
         <div id="markdownRender"></div>
         <div class="row">
-            <div class="col-lg-12" id="noteTitleCell">
+            <div class="col-md-6" id="noteTitleCell">
                 <span id="noteTitle" class="alert-info">@Model.NotebookAndTitle</span>
+            </div>
+            <div class="col-md-6" id="noteDownloadCell">
+                <a href="@Url.Action("Preview", new { note = Model.NoteId })" class="btn btn-default">View / Download</a>
             </div>
         </div>
     </div>
