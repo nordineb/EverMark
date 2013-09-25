@@ -1,10 +1,11 @@
 using Elmah;
+using EverMark.App_Start;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 
-[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(EvernoteMvcExample.ElmahConfig), "Start")]
+[assembly: WebActivatorEx.PreApplicationStartMethod(typeof(ElmahConfig), "Start")]
 
-namespace EvernoteMvcExample
+namespace EverMark.App_Start
 {
     public static class ElmahConfig
     {

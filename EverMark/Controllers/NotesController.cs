@@ -1,8 +1,8 @@
-﻿using Evernote.EDAM.NoteStore;
-using EvernoteMvcExample.ViewModels.Notes;
+﻿using EverMark.ViewModels.Notes;
+using Evernote.EDAM.NoteStore;
 using System.Web.Mvc;
 
-namespace EvernoteMvcExample.Controllers
+namespace EverMark.Controllers
 {
     [Authorize]
     public class NotesController : Controller

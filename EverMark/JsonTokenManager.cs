@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Web;
 
-namespace EvernoteMvcExample
+namespace EverMark
 {
     public class JsonTokenManager : IConsumerTokenManager
     {
@@ -32,11 +32,7 @@ namespace EvernoteMvcExample
 
         private IDictionary<string, string> LoadJson()
         {
-            IDictionary<string, string> dictionary;
-            if (File.Exists(Path))
-                dictionary = JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path));
-            else
-                dictionary = new Dictionary<string, string>();
+            var dictionary = File.Exists(Path) ? JsonConvert.DeserializeObject<Dictionary<string, string>>(File.ReadAllText(Path)) : new Dictionary<string, string>();
             return dictionary;
         }
 

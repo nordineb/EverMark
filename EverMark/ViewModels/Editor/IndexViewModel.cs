@@ -1,4 +1,4 @@
-﻿namespace EvernoteMvcExample.ViewModels.Editor
+﻿namespace EverMark.ViewModels.Editor
 {
     public class IndexViewModel
     {

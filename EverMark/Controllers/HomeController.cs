@@ -5,7 +5,7 @@ using DotNetOpenAuth.OAuth;
 using System.Web.Mvc;
 using ApplicationException = Elmah.ApplicationException;
 
-namespace EvernoteMvcExample.Controllers
+namespace EverMark.Controllers
 {
     public class HomeController : Controller
     {
@@ -29,10 +29,6 @@ namespace EvernoteMvcExample.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            return View();
-        }
 
         public ActionResult Error()
         {

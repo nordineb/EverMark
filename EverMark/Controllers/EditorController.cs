@@ -1,8 +1,8 @@
-﻿using EvernoteMvcExample.ViewModels.Editor;
+﻿using EverMark.ViewModels.Editor;
 using System.Web.Mvc;
 using System.Xml.Linq;
 
-namespace EvernoteMvcExample.Controllers
+namespace EverMark.Controllers
 {
     [Authorize]
     public class EditorController : Controller
@@ -27,7 +27,7 @@ namespace EvernoteMvcExample.Controllers
 
             content = content.Replace("\r", "").Replace("\n", "<br />");
 
-            n.Content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\"><en-note><pre>" + (content ?? "").Trim() + "</pre></en-note>";
+            n.Content = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE en-note SYSTEM \"http://xml.evernote.com/pub/enml2.dtd\"><en-note><pre>" + content.Trim() + "</pre></en-note>";
             noteStore.updateNote(User.Identity.Name, n);
 
             return RedirectToAction("Index", new { note });

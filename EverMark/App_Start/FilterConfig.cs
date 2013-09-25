@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace EvernoteMvcExample
+namespace EverMark.App_Start
 {
     public class FilterConfig
     {

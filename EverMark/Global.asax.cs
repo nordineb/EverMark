@@ -1,11 +1,9 @@
-﻿using Elmah;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
+﻿using EverMark.App_Start;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace EvernoteMvcExample
+namespace EverMark
 {
     public class MvcApplication : System.Web.HttpApplication
     {

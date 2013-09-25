@@ -3,7 +3,7 @@ using DotNetOpenAuth.OAuth;
 using DotNetOpenAuth.OAuth.ChannelElements;
 using ePunkt.Utilities;
 
-namespace EvernoteMvcExample
+namespace EverMark
 {
     public static class Configuration
     {

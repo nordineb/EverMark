@@ -4,7 +4,7 @@ using System;
 using Thrift.Protocol;
 using Thrift.Transport;
 
-namespace EvernoteMvcExample
+namespace EverMark
 {
     public static class Evernote
     {

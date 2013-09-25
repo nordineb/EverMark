@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace EvernoteMvcExample.ViewModels.Notes
+namespace EverMark.ViewModels.Notes
 {
     public class IndexViewModel
     {
