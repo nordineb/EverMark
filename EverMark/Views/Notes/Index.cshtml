@@ -7,11 +7,12 @@
     @foreach (var notebook in Model.Notebooks)
     {
         <li class="list-group-item">
+            <span class="badge">@notebook.NotesCount</span>
             <a href="@Url.Action("Index", new { notebook = notebook.Id })">@notebook.Name</a>
             <ul>
-                @foreach (var note in notebook.Notes)
+                @foreach (var note in notebook.Notes.OrderByDescending(x => x.UpdateDate))
                 {
-                    <li><a href="@Url.Action("Index", "Editor", new { note = note.Id })">@note.Name</a></li>
+                    <li><a href="@Url.Action("Index", "Editor", new { note = note.Id })">@note.Name</a> <span class="text-muted">@note.UpdateDate</span></li>
                 }
             </ul>
         </li>

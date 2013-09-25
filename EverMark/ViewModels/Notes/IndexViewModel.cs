@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace EverMark.ViewModels.Notes
 {
@@ -20,6 +21,7 @@ namespace EverMark.ViewModels.Notes
 
             public string Name { get; set; }
             public string Id { get; set; }
+            public int NotesCount { get; set; }
             public IList<Note> Notes { get; set; }
         }
 
@@ -27,6 +29,7 @@ namespace EverMark.ViewModels.Notes
         {
             public string Name { get; set; }
             public string Id { get; set; }
+            public DateTime UpdateDate { get; set; }
         }
     }
 }
